@@ -68,14 +68,16 @@ public class Node {
                 Node newNode = new Node(neighbourPoint, goalPoint, newAccumulatedDistance,this, junctions, newTotalDistance);
                 nodes.add(newNode);
             }
+
+            return nodes;
         }
-        return nodes;
+        return null;
     }
 
     /* Print the coordinates of the node */
     @Override
     public String toString() {
-        return ""+ point.getX() + "," + point.getY() + ",0";
+        return ""+ point.getLatitude() + "," + point.getLongitude() + ",0";
     }
 
     //equals and hashcode calculated based on the fields location and road_id
@@ -86,7 +88,7 @@ public class Node {
 
         Node node = (Node) o;
 
-        return (Double.compare(node.point.getX(), point.getX()) == 0 && Double.compare(node.point.getY(), point.getY()) == 0);
+        return (Double.compare(node.point.getLatitude(), point.getLatitude()) == 0 && Double.compare(node.point.getLongitude(), point.getLongitude()) == 0);
 
     }
 
@@ -94,9 +96,9 @@ public class Node {
     public int hashCode() {
         int result;
         long temp;
-        temp = Double.doubleToLongBits(point.getX());
+        temp = Double.doubleToLongBits(point.getLatitude());
         result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(point.getY());
+        temp = Double.doubleToLongBits(point.getLongitude());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }

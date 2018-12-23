@@ -1,5 +1,6 @@
 
 import java.io.*;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class Main {
@@ -14,7 +15,7 @@ public class Main {
 
             /* Open the file client.csv that contains the coordinates of the client*/
 
-            File file = new File("../csv/client.csv");
+            File file = new File("../csv/newClient.csv");
             BufferedReader in = new BufferedReader(new FileReader(file));
 
             /* Ignore the first line */
@@ -31,7 +32,7 @@ public class Main {
 
             /* Open the file taxis.csv that contains coordinates and the ids of the taxis */
 
-            file = new File("../csv/taxis.csv");
+            file = new File("../csv/newTaxis.csv");
             in = new BufferedReader(new FileReader(file));
 
             /* Ignore the first line */
@@ -159,8 +160,8 @@ public class Main {
                 }
             }
 
-            clientPoint.setX(roadPoints[minPos].getX());
-            clientPoint.setY(roadPoints[minPos].getY());
+            clientPoint.setLatitude(roadPoints[minPos].getLatitude());
+            clientPoint.setLongitude(roadPoints[minPos].getLongitude());
 
             /* Initialize minDistance variable, which is the shortest path from a taxi to a client, to infinity */
 
@@ -194,19 +195,40 @@ public class Main {
 
                 AStarSolver solver = new AStarSolver();
                 Node source = new Node(roadPoints[minPos], clientPoint, 0,null, junctions, distance);
-                Node result = solver.solve(source);
+                ArrayList<Node> results = solver.solve(source);
 
-                if (result != null) {
 
+
+
+                if (results != null) {
+
+                    Iterator<Node> iterator = results.iterator();
+
+                    if (!iterator.hasNext()) System.out.println("yes");
+
+                    Node result = iterator.next();
                     distance = result.getTotalDistance();
+
                     if (distance < minDistance) {
                         minDistance = distance;
                         minTaxiId = taxiIds[i];
                     }
 
-                    System.out.println("Taxi with id = " + taxiIds[i] + " needs a total euclideanDistance of " + result.getTotalDistance());
-                    System.out.println("The shortest path from this taxi is the following");
+                    System.out.println("Taxi with id = " + taxiIds[i] + " has a minimum path of distance " + new DecimalFormat("#0.000").format(result.getTotalDistance() / 1000) + "km");
+                    System.out.println("There are " + results.size() + " alternative minimum paths");
+
+                    System.out.println("*************************");
+                    System.out.println(result.getTotalDistance());
                     printPath(result);
+
+                    while (iterator.hasNext()) {
+
+                        result = iterator.next();
+
+                        System.out.println("*************************");
+                        System.out.println(result.getTotalDistance());
+                        printPath(result);
+                    }
                 }
 
                 else {
@@ -215,7 +237,7 @@ public class Main {
                 }
 
             }
-            System.out.println("The shortest path is " + minDistance +  " from the taxi with id =  " + minTaxiId);
+            System.out.println("The minimum path has a distance " + new DecimalFormat("#0.000").format(minDistance/1000) + "km" + " from the taxi with id =  " + minTaxiId);
         }
         catch(Exception exc) {
             exc.printStackTrace();

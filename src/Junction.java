@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Junction {
 
     private Point point; /* The coordinates of the junction */
-    private ArrayList<Point> neighbours; /* The indexes of the neighbour nodes from the original file */
+    private ArrayList<Point> neighbours; /* The points of the neighbour nodes */
 
     public ArrayList<Point> getNeighbours() {
         return neighbours;
@@ -18,6 +18,7 @@ public class Junction {
     }
 
     public void addNeighbour(Point point){
+
         neighbours.add(point);
     }
 
@@ -32,7 +33,7 @@ public class Junction {
 
         Junction connection = (Junction) o;
 
-        return (Double.compare(connection.point.getX(), point.getX()) == 0 && Double.compare(connection.point.getY(), point.getY()) == 0);
+        return (Double.compare(connection.point.getLatitude(), point.getLatitude()) == 0 && Double.compare(connection.point.getLongitude(), point.getLongitude()) == 0);
 
     }
 
@@ -40,9 +41,9 @@ public class Junction {
     public int hashCode() {
         int result;
         long temp;
-        temp = Double.doubleToLongBits(point.getX());
+        temp = Double.doubleToLongBits(point.getLatitude());
         result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(point.getY());
+        temp = Double.doubleToLongBits(point.getLongitude());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
