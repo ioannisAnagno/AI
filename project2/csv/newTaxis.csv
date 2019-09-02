@@ -1,0 +1,12 @@
+X,Y,id,available,capacity,languages,rating,long_distance,type	description
+23.741587,37.984125,100,yes,1-2,greek,5.3,no,subcompact	(Εξάρχεια)
+23.747316,37.991529,110,yes,1-4,english,5.2,no,large	(Ταύρος)
+23.757838,37.962517,120,yes,1-4,greek,8.5,yes,compact	(Βύρωνας)
+23.708168,38.005598,130,no,1-4,greek|english,8.2,no,subcompact	(Μαρούσι)
+23.766993,38.018644,140,yes,1-4,greek|english,3.1,no,large	(Ψυχικό)
+23.750063,37.974481,150,yes,1-4,greek,6.3,no,subcompact	(Νέος Κόσμος)
+23.740078,37.945631,160,yes,1-4,greek|english,6.1,yes,large	(Δάφνη)
+23.765173,38.000458,170,no,1-2,greek|english,4.2,no,large	(Φιλοθέη)
+23.767763,37.945429,180,yes,1-4,english,7.0,no,subcompact	(Καρέας)
+23.781656,37.997752,190,yes,1-4,greek|english,7.4,no,large	(Περιστέρι)
+23.795044,38.012519,200,yes,1-4,greek,5.2,no,compact	(Χαλάνδρι)
